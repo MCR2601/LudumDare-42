@@ -60,7 +60,7 @@ public static class BuildingDetector{
 
         List<MaterialOffset> offsets = blueprint.MaterialRequirements.RotateBy90Deg(rotationToUse);
 
-        foreach (var item in blueprint.MaterialRequirements)
+        foreach (var item in offsets)
         {
             // skip over logic
             if (!exist)
