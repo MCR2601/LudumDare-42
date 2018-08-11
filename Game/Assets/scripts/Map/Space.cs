@@ -34,7 +34,22 @@ public class Space {
 
     }
     
-
+    public Dictionary<string,int> getAvaiableMaterial()
+    {
+        Dictionary<string, int> m = new Dictionary<string, int>();
+        foreach (var item in Materials)
+        {
+            if (!m.ContainsKey(item.Name))
+            {
+                m.Add(item.Name, 1);
+            }
+            else
+            {
+                m[item.Name]++;
+            }
+        }
+        return m;
+    }
 
 
 

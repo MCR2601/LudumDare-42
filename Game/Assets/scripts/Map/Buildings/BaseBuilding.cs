@@ -17,10 +17,9 @@ public class BaseBuilding {
 
     protected bool usable = false;
 
+    public MaterialInput Input;
 
-
-
-
+    public MaterialOutput Output;
 
     public BaseBuilding()
     {
@@ -32,6 +31,9 @@ public class BaseBuilding {
     {
         BaseBuilding bb = new BaseBuilding
         {
+            Input = Input,
+            Output = Output,
+            occupying = occupying,
             usable = true,
             Name = Name,
             VisualName = VisualName
@@ -40,7 +42,22 @@ public class BaseBuilding {
         return bb;
     }
 
+    public void PlaceWithOrientation(int rotation, SimpleCords atLocation)
+    {
+        if (usable)
+        {
+            GameObject obj = Object.Instantiate(ResourceLibrary.GetPrefabByName(VisualName));
+            obj.transform.position = atLocation;
+            GameObject = obj;
 
+            // TODO: Rotation
+            // TODO: Place Object with everything
+        }
+        else
+        {
+            throw new System.Exception("Used Unusable Building!");
+        }
+    }
 
 
 

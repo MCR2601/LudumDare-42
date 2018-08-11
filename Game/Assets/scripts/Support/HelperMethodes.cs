@@ -31,4 +31,37 @@ public static class HelperMethodes {
             }
         }
     }
+    public static Tile SaveGet(this Tile[,] Map,int x, int z)
+    {
+        if (x>0 && x < Map.GetLength(0))
+        {
+            if (z > 0 && z < Map.GetLength(1))
+            {
+                return Map[x, z];
+            }
+        }
+        return new Tile(new SimpleCords(x, z)) { occupation = TileOccupation.Error};
+    }
+
+
+    public static List<MaterialOffset> RotateBy90Deg(this List<MaterialOffset> set,int turnAmount)
+    {
+        List<MaterialOffset> newList = new List<MaterialOffset>();
+
+        foreach (var item in set)
+        {
+            Offset offset = new Offset(item.Offset.x, item.Offset.y);
+            for (int i = 0; i < turnAmount; i++)
+            {
+                // this is some mathematical stuff, very fun but a bit confusing
+                offset = new Offset(offset.x - (offset.x - offset.y), offset.y - (offset.x + offset.y));
+            }
+            newList.Add(new MaterialOffset() { MaterialName = item.MaterialName, Offset = offset});
+        }
+        return newList;
+
+    }
+
+
+
 }

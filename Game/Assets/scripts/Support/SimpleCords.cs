@@ -29,6 +29,10 @@ public class SimpleCords {
         this.y = cords.y;
     }
 
+    public SimpleCords OffsetBy(Offset offset)
+    {
+        return new SimpleCords(x + offset.x, z + offset.y);
+    }
 
     public static implicit operator Vector3(SimpleCords simple)
     {
