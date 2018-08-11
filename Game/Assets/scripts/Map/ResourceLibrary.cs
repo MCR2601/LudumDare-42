@@ -42,4 +42,11 @@ public static class ResourceLibrary {
         }
         return temp;
     }
+
+    public static GameObject GetPrefabByName(string Name)
+    {
+        return library[Name];
+    }
+
+
 }

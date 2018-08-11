@@ -6,5 +6,6 @@ public enum TileOccupation
 {
     Empty,
     Material,
-    Building
+    Building,
+    Error
 }
