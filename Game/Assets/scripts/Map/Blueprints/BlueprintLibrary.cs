@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BlueprintLibrary  {
+    
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // IMPORTANT!!!!!!!!!!!!!!
+    // every Offset a building occupies has to be used for the recipie.
+    // it is ok to not occupy all tiles
+    // we currently DO NOT SUPPORT empty Tiles
 
     private readonly Dictionary<string, BaseBlueprint> library = new Dictionary<string, BaseBlueprint>()
     {
