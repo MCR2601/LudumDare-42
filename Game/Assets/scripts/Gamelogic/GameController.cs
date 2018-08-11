@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
     public GameState State = GameState.Idle;
     public Tool activeTool = Tool.Shovel;
 
+    private readonly Queue<ProcessingStep> ProcessQueue = new Queue<ProcessingStep>();
     
 	// Use this for initialization
 	void Start () {
@@ -26,7 +27,7 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+        //TODO delete this
         if (!spawned && Time.time > 3 )
         {
             Debug.Log("Something should have happend");
@@ -35,5 +36,57 @@ public class GameController : MonoBehaviour {
             spawned = true;
         }
 
-	}
+        // flow control
+        switch (State)
+        {
+            case GameState.Menu:
+                // check menu items for clicks with raycasts
+
+
+                break;
+            case GameState.Idle:
+                // check everything for clicks with raycasts
+                // check for hover
+                // if hover start displaying Information (i think just the name for now)
+                // check for legal moves on drag and so on
+                
+
+
+
+                break;
+            case GameState.Processing:
+                break;
+            case GameState.Skipping:
+                break;
+            default:
+                break;
+        }
+
+
+
+
+
+    }
+
+    // you can use lambda expressions for processing
+    
+
+    void AdvanceTimers()
+    {
+
+    }
+
+    void DoInput()
+    {
+
+    }
+
+    void DoOutput()
+    {
+
+    }
+
+
+
+
 }
