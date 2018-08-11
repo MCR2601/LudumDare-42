@@ -32,7 +32,7 @@ public class BaseMaterial  {
         if (usable)
         {
             GameObject obj = Object.Instantiate(ResourceLibrary.GetPrefabByName(VisualName));
-            obj.transform.position = atLocation;
+            obj.transform.position = new Vector3(atLocation.x,atLocation.y+0.5f,atLocation.z);
             GameObject = obj;
         }
         else

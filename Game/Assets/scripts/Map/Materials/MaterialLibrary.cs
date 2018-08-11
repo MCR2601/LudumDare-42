@@ -9,7 +9,7 @@ public class MaterialLibrary  {
         {"Dirt", new BaseMaterial
         {
            Name = "Dirt",
-           VisualName = "material_dirt"
+           VisualName = "material_Dirt"
         } },
     };
 
