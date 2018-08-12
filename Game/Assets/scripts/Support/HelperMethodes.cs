@@ -40,7 +40,7 @@ public static class HelperMethodes {
                 return Map[x, z];
             }
         }
-        return new Tile(new SimpleCords(x, z)) { occupation = TileOccupation.Error};
+        return new Tile(new SimpleCords(x, z)) { occupation = TileOccupation.Error, position = new SimpleCords(x,z)};
     }
 
 
