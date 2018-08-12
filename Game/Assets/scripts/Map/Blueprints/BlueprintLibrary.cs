@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BlueprintLibrary  {
-    
+
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // IMPORTANT!!!!!!!!!!!!!!
-    // every Offset a building occupies has to be used for the recipie.
+    // every Offset a building occupies has to be used for the recipe.
     // it is ok to not occupy all tiles
     // we currently DO NOT SUPPORT empty Tiles
 
@@ -21,6 +21,30 @@ public class BlueprintLibrary  {
                 {
                    MaterialName = "Dirt",
                    Offset = new Offset(0,0)
+                }
+            }
+        } },
+        {"Furnace", new BaseBlueprint
+        {
+            Name = "Furnace",
+            MaterialRequirements = new List<MaterialOffset>
+            {
+                new MaterialOffset()
+                {
+                   MaterialName = "Wood",
+                   Offset = new Offset(0,0)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Stone",
+                    Offset = new Offset(0,-1)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Stone",
+                    Offset = new Offset(1,0)
                 }
             }
         } },
