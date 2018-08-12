@@ -22,7 +22,7 @@ public class BuildingLibrary {
                 DeliverTimer = 3,
                 DeliveryLocation = new Offset(0,1),
                 MaterialName = "Dirt"
-            }             
+            }
         } },
         // follow here with other entries
 
