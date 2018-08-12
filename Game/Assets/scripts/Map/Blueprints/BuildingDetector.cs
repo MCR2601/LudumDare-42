@@ -9,7 +9,7 @@ public static class BuildingDetector{
     public static List<DetectedBuilding> DetectBuildings(Space space, BlueprintLibrary library)
     {
         List<BaseBlueprint> bPrints = library.GetAllBlueprints();
-        bPrints = FindPossibleBlueprints(bPrints, space.getAvaiableMaterial());
+        bPrints = FindPossibleBlueprints(bPrints, space.GetAvaiableMaterial());
         Tile[,] Map = space.Map;
 
         List<DetectedBuilding> possibleBuildings = new List<DetectedBuilding>();

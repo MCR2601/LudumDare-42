@@ -9,6 +9,10 @@ public enum GameState
     /// </summary>
     Menu,
     /// <summary>
+    /// not running but still in a run
+    /// </summary>
+    PauseMenu,
+    /// <summary>
     /// In-Game, but the Game is waiting for the playerinput
     /// </summary>
     Idle,

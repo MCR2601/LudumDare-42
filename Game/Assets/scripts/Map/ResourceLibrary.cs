@@ -13,39 +13,39 @@ public static class ResourceLibrary {
     /// prop_pallet
     /// building_well
     /// </example>
-    private readonly static Dictionary<string, GameObject> library;
+    private readonly static Dictionary<string, string> library; // name for internal/name for external
 
     static ResourceLibrary()
     {
          library = LoadAllResources();
     }
 
-    private static Dictionary<string, GameObject> LoadAllResources()
+    private static Dictionary<string, string> LoadAllResources()
     {
         GameObject[] Materials =  Resources.LoadAll<GameObject>("materials");
         GameObject[] Buildings = Resources.LoadAll<GameObject>("buildings");
         GameObject[] Props = Resources.LoadAll<GameObject>("props");
 
-        Dictionary<string, GameObject> temp = new Dictionary<string, GameObject>();
+        Dictionary<string, string> temp = new Dictionary<string, string>();
 
         foreach (var item in Materials)
         {
-            temp.Add("material_" + item.name, item);
+            temp.Add("material_" + item.name, "materials/"+item.name);
         }
         foreach (var item in Buildings)
         {
-            temp.Add("building_" + item.name, item);
+            temp.Add("building_" + item.name, "buildings/"+item.name);
         }
         foreach (var item in Props)
         {
-            temp.Add("prop_" + item.name, item);
+            temp.Add("prop_" + item.name, "props/"+item.name);
         }
         return temp;
     }
 
     public static GameObject GetPrefabByName(string Name)
     {
-        return library[Name];
+        return Resources.Load<GameObject>(library[Name]);
     }
 
 

@@ -54,8 +54,8 @@ public class TooltipScript : MonoBehaviour {
     public void ShowToolTipMaterial(BaseMaterial material)
     {
         anim.SetTrigger("Show");
-        Name.text = material.Name + " - Material";
-        Consumes.text = "-";
+        Name.text = material.Name;
+        Consumes.text = "- Material";
         Produces.text = "-";
     }
     public void ShowToolTipBuilding(BaseBuilding building)
@@ -66,5 +66,4 @@ public class TooltipScript : MonoBehaviour {
         Consumes.text = building.Input.enabled ? "Consumes: "+building.Input.ConsumeAmount + "x " + building.Input.MaterialName : "Consumes: None";
         Produces.text = "Produces: " + building.Output.MaterialName + " (" + building.Output.DeliverTimer + " turns)";
     }
-
 }
