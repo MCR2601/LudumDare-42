@@ -33,9 +33,9 @@ public static class HelperMethodes {
     }
     public static Tile SaveGet(this Tile[,] Map,int x, int z)
     {
-        if (x>0 && x < Map.GetLength(0))
+        if (x>=0 && x < Map.GetLength(0))
         {
-            if (z > 0 && z < Map.GetLength(1))
+            if (z >= 0 && z < Map.GetLength(1))
             {
                 return Map[x, z];
             }

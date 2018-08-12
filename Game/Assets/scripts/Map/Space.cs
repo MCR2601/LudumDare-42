@@ -34,7 +34,7 @@ public class Space {
 
     }
     
-    public Dictionary<string,int> getAvaiableMaterial()
+    public Dictionary<string,int> GetAvaiableMaterial()
     {
         Dictionary<string, int> m = new Dictionary<string, int>();
         foreach (var item in Materials)
@@ -51,6 +51,43 @@ public class Space {
         return m;
     }
 
+    public bool IsBuildingDelivering()
+    {
+        foreach (var item in Buildings)
+        {
+            if (item.Output.ConsumeToGo<=0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// use this with unplaced Objects
+    /// </summary>
+    /// <param name="material">the material</param>
+    /// <param name="location">position of placement</param>
+    public void SpawnMaterial(BaseMaterial material, SimpleCords location)
+    {
+        Map[location.x, location.z].Material = material;
+        Map[location.x, location.z].occupation = TileOccupation.Material;
+
+        material.Place(location);
+
+    }
+    /// <summary>
+    /// use this with unplaced Objects
+    /// </summary>
+    /// <param name="building">the building</param>
+    /// <param name="location">position of placement</param>
+    public void SpawnBuilding(BaseBuilding building, SimpleCords location,int orientation)
+    {
+        Map[location.x, location.z].Building = building;
+        Map[location.x, location.z].occupation = TileOccupation.Building;
+
+        building.PlaceWithOrientation(orientation,location);
+    }
 
 
 
