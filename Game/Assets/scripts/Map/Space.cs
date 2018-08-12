@@ -74,7 +74,7 @@ public class Space {
         Map[location.x, location.z].occupation = TileOccupation.Material;
 
         material.Place(location);
-
+        Materials.Add(material);
     }
     /// <summary>
     /// use this with unplaced Objects
@@ -86,7 +86,16 @@ public class Space {
         Map[location.x, location.z].Building = building;
         Map[location.x, location.z].occupation = TileOccupation.Building;
 
+        foreach (var item in building.occupying)
+        {
+            SimpleCords c = location.OffsetBy(item);
+            Map[c.x, c.z].Building = building;
+            Map[c.x, c.z].occupation = TileOccupation.Building;
+        }
+
+        building.CenterLocation = location;
         building.PlaceWithOrientation(orientation,location);
+        Buildings.Add(building);
     }
 
 

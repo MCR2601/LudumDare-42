@@ -9,7 +9,7 @@ public class BuildingLibrary {
         {"Extractor", new BaseBuilding
         {
             Name = "Extractor",
-            VisualName = "building_extractor",
+            VisualName = "building_Extractor",
             occupying = new Offset[]
             {
                 new Offset(0,0)
@@ -22,7 +22,7 @@ public class BuildingLibrary {
                 DeliverTimer = 3,
                 DeliveryLocation = new Offset(0,1),
                 MaterialName = "Dirt"
-            }             
+            }
         } },
         // follow here with other entries
 

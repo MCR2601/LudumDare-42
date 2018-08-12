@@ -92,10 +92,13 @@ public static class BuildingDetector{
             bool possible = true;
             foreach (var m in item.GetMaterialRequirements())
             {
-                if (m.Value > dictionary[m.Key])
+                if (dictionary.ContainsKey(m.Key))
                 {
-                    possible = false;
-                }
+                    if (m.Value > dictionary[m.Key])
+                    {
+                        possible = false;
+                    }
+                }                
             }
             if (possible)
             {

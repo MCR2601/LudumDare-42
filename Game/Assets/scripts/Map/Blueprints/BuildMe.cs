@@ -13,4 +13,18 @@ public class BuildMe : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public DetectedBuilding Information;
+
+    public ProcessingStep clicker;
+
+    public void OnMouseDown()
+    {
+        if (clicker != null)
+        {
+            clicker();
+        }
+    }
+    
+
 }

@@ -21,6 +21,12 @@ public class BaseBuilding {
 
     public MaterialOutput Output;
 
+    public SimpleCords CenterLocation;
+
+    public GameObject Timer;
+
+    public lookAtCamera Clock;
+
     public BaseBuilding()
     {
 
@@ -49,6 +55,12 @@ public class BaseBuilding {
             GameObject obj = Object.Instantiate(ResourceLibrary.GetPrefabByName(VisualName));
             obj.transform.position = atLocation;
             GameObject = obj;
+            GameObject t = Object.Instantiate(ResourceLibrary.GetPrefabByName("prop_Timer"));
+            t.transform.position = atLocation;
+            Clock = t.GetComponentInChildren<lookAtCamera>();
+            Timer = t;
+
+            Clock.SetTimer(Output.DeliverTimer);
 
             // TODO: Rotation
             // TODO: Place Object with everything
