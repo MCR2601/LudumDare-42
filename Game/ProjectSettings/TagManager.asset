@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Hoverable
   - ToolTip
+  - Clickable
   layers:
   - Default
   - TransparentFX

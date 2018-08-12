@@ -9,7 +9,7 @@ public class BuildingLibrary {
         {"Extractor", new BaseBuilding
         {
             Name = "Extractor",
-            VisualName = "building_extractor",
+            VisualName = "building_Extractor",
             occupying = new Offset[]
             {
                 new Offset(0,0)
