@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 23481343459711884}
   - component: {fileID: 65754974860758190}
   - component: {fileID: 95007213070000086}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DirtVisual
   m_TagString: Hoverable
   m_Icon: {fileID: 0}
