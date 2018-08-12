@@ -60,7 +60,9 @@ public class GameController : MonoBehaviour {
 
     private BaseMaterial hoverMaterial;
     private BaseBuilding hoverBuilding;
-    
+
+    private List<GameObject> possibleBuildingHammer = new List<GameObject>();
+
 	// Use this for initialization
 	void Start () {
         space = new Space(6, 6);
@@ -88,7 +90,7 @@ public class GameController : MonoBehaviour {
             spawned = true;
         }
 
-        #region Idle Mouse things
+        
         RaycastHit hit;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -104,200 +106,7 @@ public class GameController : MonoBehaviour {
 
                 break;
             case GameState.PauseMenu:
-                if (Input.GetKey(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    // stop hovering because of click
-
-                    if (isHovering)
-                    {
-                        toolTip.HideToolTip();
-                        isHovering = false;
-                        hoverTime = 0f;
-                    }
-
-                    if (isHolding)
-                    {
-                        // move the held Object around until we drop it
-                        // get location
-                        int mask = 1 << 10;
-                        if (Physics.Raycast(ray, out hit, 100, mask))
-                        {
-                            //Debug.Log("hit something and i am starting to calculate");
-                            Vector3 hitLoc = hit.transform.position;
-                            SimpleCords location = new SimpleCords((int)Mathf.Round(hitLoc.x), (int)originLocation.y, (int)Mathf.Round(hitLoc.z));
-
-                            bool contains = false;
-                            for (int i = 0; i < possiblePositions.Count; i++)
-                            {
-                                if (possiblePositions[i].Equals(location))
-                                {
-                                    holdPosition = location;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // we dont care that can happen when going to far
-                            //Debug.Log("spam");
-                        }
-                        ObjectsToReturn.RemoveAll((x) => x.Key == heldMaterial.GameObject);
-                        heldMaterial.GameObject.transform.position = Vector3.Lerp(heldMaterial.GameObject.transform.position, new Vector3(0f, 1.5f, 0f) + (Vector3)holdPosition, 8 * Time.deltaTime);
-                    }
-                    else
-                    {
-                        // get gameobject we are pointing at
-                        int hitmask = 1 << 11;
-                        // if we dont hit anything we dont want to grab
-                        // lets work on changing that
-                        if (Physics.Raycast(ray, out hit, 100, hitmask))
-                        {
-
-                            Vector3 hitLoc = hit.transform.position;
-                            SimpleCords location = new SimpleCords((int)Mathf.Round(hitLoc.x), (int)Mathf.Round(hitLoc.y), (int)Mathf.Round(hitLoc.z));
-                            Tile t = space.Map.SaveGet(location.x, location.z);
-                            // 
-                            if (t.occupation == TileOccupation.Material)
-                            {
-                                holdTime += Time.deltaTime;
-                                holdingMaterial = t.Material;
-                                if (holdTime > requiredHoldTime)
-                                {
-                                    // we have to switch a lot around
-                                    isHolding = true;
-                                    moveState = MoveState.Raise;
-                                    originLocation = location;
-                                    heldMaterial = t.Material;
-                                    holdPosition = location;
-                                    ShowPossibleDroplocations();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // we dont point at anything so we just reset some numbers
-                            holdTime = 0f;
-                        }
-                    }
-                }
-                else
-                {
-                    // if we were holding something lets put it back
-                    DropMaterial();
-
-
-                    // hover calculations
-                    int hitmask = 1 << 11 | 1 << 10;
-                    if (Physics.Raycast(ray, out hit, 100, hitmask))
-                    {
-
-                        Vector3 hitLoc = hit.transform.position;
-                        SimpleCords location = new SimpleCords((int)Mathf.Round(hitLoc.x), (int)Mathf.Round(hitLoc.y), (int)Mathf.Round(hitLoc.z));
-                        Tile t = space.Map.SaveGet(location.x, location.z);
-                        //Debug.Log(t.occupation);
-                        if (isHovering)
-                        {
-                            if (t.occupation == TileOccupation.Material && isHoveringMaterial && t.Material == hoverMaterial)
-                            {
-                                // still hovering over the same Material                        
-                            }
-                            else
-                            {
-                                if (t.occupation == TileOccupation.Building && !isHoveringMaterial && t.Building == hoverBuilding)
-                                {
-                                    // still hovering over the same Building
-                                }
-                                else
-                                {
-                                    // we are not hovering over the same anymore
-                                    // hide tooltip and so on
-                                    toolTip.HideToolTip();
-                                    isHovering = false;
-                                    hoverTime = 0f;
-                                    switch (t.occupation)
-                                    {
-                                        case TileOccupation.Empty:
-                                            break;
-                                        case TileOccupation.Material:
-                                            // new material
-                                            isHoveringMaterial = true;
-                                            hoverMaterial = t.Material;
-                                            break;
-                                        case TileOccupation.Building:
-                                            // new building
-                                            isHoveringMaterial = false;
-                                            hoverBuilding = t.Building;
-                                            break;
-                                        case TileOccupation.Error:
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                }
-                            }
-
-                        }
-                        else
-                        {
-                            if (t.occupation == TileOccupation.Material && isHoveringMaterial && t.Material == hoverMaterial)
-                            {
-                                hoverTime += Time.deltaTime;
-                                // still hovering over the same Material
-                                if (hoverTime >= requiredHoverTime)
-                                {
-                                    isHovering = true;
-                                    toolTip.ShowToolTipMaterial(t.Material);
-                                }
-                            }
-                            else
-                            {
-                                if (t.occupation == TileOccupation.Building && !isHoveringMaterial && t.Building == hoverBuilding)
-                                {
-                                    hoverTime += Time.deltaTime;
-                                    // still hovering over the same Building
-                                    if (hoverTime >= requiredHoverTime)
-                                    {
-                                        isHovering = true;
-                                        toolTip.ShowToolTipBuilding(t.Building);
-                                    }
-                                }
-                                else
-                                {
-                                    isHovering = false;
-                                    hoverTime = 0f;
-                                    switch (t.occupation)
-                                    {
-                                        case TileOccupation.Material:
-                                            // new material
-                                            isHoveringMaterial = true;
-                                            hoverMaterial = t.Material;
-                                            break;
-                                        case TileOccupation.Building:
-                                            // new building
-                                            isHoveringMaterial = false;
-                                            hoverBuilding = t.Building;
-                                            break;
-                                        default:
-                                            hoverBuilding = null;
-                                            hoverMaterial = null;
-                                            break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (isHovering)
-                        {
-                            toolTip.HideToolTip();
-                            isHovering = false;
-                            hoverTime = 0f;
-                        }
-                    }
-                    #endregion
-
-
-                }
+                
 
                 break;
             case GameState.Idle:
@@ -312,9 +121,203 @@ public class GameController : MonoBehaviour {
                 }
                 else
                 {
+                    #region Idle Mouse things
                     // normal user input proceeding
+                    if (Input.GetKey(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        // stop hovering because of click
+                        
+                        if (isHovering)
+                        {
+                            toolTip.HideToolTip();
+                            isHovering = false;
+                            hoverTime = 0f;
+                        }
+
+                        if (isHolding)
+                        {
+                            // move the held Object around until we drop it
+                            // get location
+                            int mask = 1 << 10;
+                            if (Physics.Raycast(ray, out hit, 100, mask))
+                            {
+                                //Debug.Log("hit something and i am starting to calculate");
+                                Vector3 hitLoc = hit.transform.position;
+                                SimpleCords location = new SimpleCords((int)Mathf.Round(hitLoc.x), (int)originLocation.y, (int)Mathf.Round(hitLoc.z));
+
+                                bool contains = false;
+                                for (int i = 0; i < possiblePositions.Count; i++)
+                                {
+                                    if (possiblePositions[i].Equals(location))
+                                    {
+                                        holdPosition = location;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // we dont care that can happen when going to far
+                                //Debug.Log("spam");
+                            }
+                            ObjectsToReturn.RemoveAll((x) => x.Key == heldMaterial.GameObject);
+                            heldMaterial.GameObject.transform.position = Vector3.Lerp(heldMaterial.GameObject.transform.position, new Vector3(0f, 1.5f, 0f) + (Vector3)holdPosition, 8 * Time.deltaTime);
+                        }
+                        else
+                        {
+                            // get gameobject we are pointing at
+                            int hitmask = 1 << 11;
+                            // if we dont hit anything we dont want to grab
+                            // lets work on changing that
+                            if (Physics.Raycast(ray, out hit, 100, hitmask))
+                            {
+
+                                Vector3 hitLoc = hit.transform.position;
+                                SimpleCords location = new SimpleCords((int)Mathf.Round(hitLoc.x), (int)Mathf.Round(hitLoc.y), (int)Mathf.Round(hitLoc.z));
+                                Tile t = space.Map.SaveGet(location.x, location.z);
+                                // 
+                                if (t.occupation == TileOccupation.Material)
+                                {
+                                    holdTime += Time.deltaTime;
+                                    holdingMaterial = t.Material;
+                                    if (holdTime > requiredHoldTime)
+                                    {
+                                        // we have to switch a lot around
+                                        isHolding = true;
+                                        moveState = MoveState.Raise;
+                                        originLocation = location;
+                                        heldMaterial = t.Material;
+                                        holdPosition = location;
+                                        ShowPossibleDroplocations();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // we dont point at anything so we just reset some numbers
+                                holdTime = 0f;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // if we were holding something lets put it back
+                        DropMaterial();
 
 
+                        // hover calculations
+                        int hitmask = 1 << 11 | 1 << 10;
+                        if (Physics.Raycast(ray, out hit, 100, hitmask))
+                        {
+
+                            Vector3 hitLoc = hit.transform.position;
+                            SimpleCords location = new SimpleCords((int)Mathf.Round(hitLoc.x), (int)Mathf.Round(hitLoc.y), (int)Mathf.Round(hitLoc.z));
+                            Tile t = space.Map.SaveGet(location.x, location.z);
+                            //Debug.Log(t.occupation);
+                            if (isHovering)
+                            {
+                                if (t.occupation == TileOccupation.Material && isHoveringMaterial && t.Material == hoverMaterial)
+                                {
+                                    // still hovering over the same Material                        
+                                }
+                                else
+                                {
+                                    if (t.occupation == TileOccupation.Building && !isHoveringMaterial && t.Building == hoverBuilding)
+                                    {
+                                        // still hovering over the same Building
+                                    }
+                                    else
+                                    {
+                                        // we are not hovering over the same anymore
+                                        // hide tooltip and so on
+                                        toolTip.HideToolTip();
+                                        isHovering = false;
+                                        hoverTime = 0f;
+                                        switch (t.occupation)
+                                        {
+                                            case TileOccupation.Empty:
+                                                break;
+                                            case TileOccupation.Material:
+                                                // new material
+                                                isHoveringMaterial = true;
+                                                hoverMaterial = t.Material;
+                                                break;
+                                            case TileOccupation.Building:
+                                                // new building
+                                                isHoveringMaterial = false;
+                                                hoverBuilding = t.Building;
+                                                break;
+                                            case TileOccupation.Error:
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                if (t.occupation == TileOccupation.Material && isHoveringMaterial && t.Material == hoverMaterial)
+                                {
+                                    hoverTime += Time.deltaTime;
+                                    // still hovering over the same Material
+                                    if (hoverTime >= requiredHoverTime)
+                                    {
+                                        isHovering = true;
+                                        toolTip.ShowToolTipMaterial(t.Material);
+                                    }
+                                }
+                                else
+                                {
+                                    if (t.occupation == TileOccupation.Building && !isHoveringMaterial && t.Building == hoverBuilding)
+                                    {
+                                        hoverTime += Time.deltaTime;
+                                        // still hovering over the same Building
+                                        if (hoverTime >= requiredHoverTime)
+                                        {
+                                            isHovering = true;
+                                            toolTip.ShowToolTipBuilding(t.Building);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        isHovering = false;
+                                        hoverTime = 0f;
+                                        switch (t.occupation)
+                                        {
+                                            case TileOccupation.Material:
+                                                // new material
+                                                isHoveringMaterial = true;
+                                                hoverMaterial = t.Material;
+                                                break;
+                                            case TileOccupation.Building:
+                                                // new building
+                                                isHoveringMaterial = false;
+                                                hoverBuilding = t.Building;
+                                                break;
+                                            default:
+                                                hoverBuilding = null;
+                                                hoverMaterial = null;
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (isHovering)
+                            {
+                                toolTip.HideToolTip();
+                                isHovering = false;
+                                hoverTime = 0f;
+                            }
+                        }
+                       
+
+
+                    }
+ #endregion
                 }
                 break;
             case GameState.Processing:
@@ -323,14 +326,22 @@ public class GameController : MonoBehaviour {
                 if (ProcessQueue.Count==0 && ProcessCompleted)
                 {
                     State = GameState.Idle;
+                    Debug.Log("Moving to Idle");
                 }
                 else
                 {
                     if (ProcessCompleted)
                     {
+                        //Debug.Log("Process Complete and redoing");
                         // execute the first delegate (this looks really funny :D)
-                        ProcessQueue.Dequeue()();
                         ProcessCompleted = false;
+                        ProcessQueue.Dequeue().Invoke();
+                        
+                        //Debug.Log("Invoked and waiting");
+                    }
+                    else
+                    {
+                        
                     }
                 }
                 break;
@@ -373,7 +384,7 @@ public class GameController : MonoBehaviour {
             isHolding = false;
             holdTime = 0f;
 
-            HidePossibleBuildings();
+            HidePossiblePositions();
         }
     }
 
@@ -394,6 +405,23 @@ public class GameController : MonoBehaviour {
         m.position = t.position;
         AdvanceToProcessing();
     }
+    /// <summary>
+    /// remove a material
+    /// </summary>
+    /// <param name="t">the tile with the material on it</param>
+    private void RemoveMaterial(Tile t)
+    {
+        Debug.Log("Called");
+        if (t.occupation == TileOccupation.Material)
+        {
+            t.occupation = TileOccupation.Empty;
+            ObjectsToReturn.RemoveAll((x) => { return x.Key == t.Material.GameObject; });
+            Destroy(t.Material.GameObject);
+            t.Material = null;
+            
+        }
+    }
+
 
     private void AdvanceToProcessing()
     {
@@ -401,11 +429,14 @@ public class GameController : MonoBehaviour {
         State = GameState.Processing;
         //TODO: look closely
         //register all the things to the queue
+        ProcessQueue.Enqueue(HidePossibleBuildings);
         ProcessQueue.Enqueue(DoInput);
         ProcessQueue.Enqueue(AdvanceTimers);
         ProcessQueue.Enqueue(DoOutput);
-
+        ProcessQueue.Enqueue(ShowPossibleBuildings);
     }
+
+
 
     private void MoveAllObjectsBack()
     {
@@ -426,12 +457,13 @@ public class GameController : MonoBehaviour {
 
     public void ReportDone()
     {
+        //Debug.Log("I am done");
         ProcessCompleted = true;
     }
 
     // you can use lambda expressions for processing
     
-    void HidePossibleBuildings()
+    void HidePossiblePositions()
     {
         foreach (var item in possiblePositionsGO)
         {
@@ -443,25 +475,132 @@ public class GameController : MonoBehaviour {
         possiblePositionsGO.RemoveRange(0, possiblePositionsGO.Count);
 
     }
-    
+
+    void HidePossibleBuildings()
+    {
+        List<GameObject> list = new List<GameObject>(possibleBuildingHammer);
+        foreach (var item in list)
+        {
+            DestroyImmediate(item, true);
+            possibleBuildingHammer.Remove(item);
+        }
+        ReportDone();
+    }
+
     void DoInput()
     {
-
+        foreach (var item in space.Buildings)
+        {
+            if (item.Input.enabled)
+            {
+                SimpleCords inputLocation = item.CenterLocation.OffsetBy(item.Input.InputLocation);
+                if (item.Input.ConsumeToGo>0)
+                {
+                    Tile t = space.Map.SaveGet(inputLocation.x, inputLocation.z);
+                    if (t.occupation == TileOccupation.Material && t.Material.Name == item.Input.MaterialName)
+                    {
+                        item.Input.ConsumeToGo--;
+                        item.Output.ConsumeToGo--;
+                        RemoveMaterial(t);
+                    }
+                }
+            }
+            else
+            {
+                if (item.Output.TimeToGo==-1)
+                {
+                    item.Output.TimeToGo = item.Output.DeliverTimer;
+                    item.Clock.SetTimer(item.Output.TimeToGo);
+                }
+            }
+        }
+        ReportDone();
     }
 
     void AdvanceTimers()
     {
-
+        foreach (var item in space.Buildings)
+        {
+            if (item.Output.TimeToGo == -1)
+            {
+                item.Output.TimeToGo = item.Output.DeliverTimer;
+            }
+            if ((item.Output.ConsumeToGo==0 && item.Output.HasToConsume && item.Output.TimeToGo > 0)||(item.Output.TimeToGo>0&&!item.Output.HasToConsume))
+            {
+                
+                Debug.Log("es sollte funktionieren");
+                item.Output.TimeToGo--;
+                item.Clock.SetTimer(item.Output.TimeToGo);                
+            }
+        }
+        ReportDone();
     }
 
     void DoOutput()
     {
+        foreach (var item in space.Buildings)
+        {
+            if ((item.Output.ConsumeToGo == 0 && item.Output.TimeToGo==0)|| (!item.Input.enabled && item.Output.TimeToGo == 0))
+            {
+                Debug.Log("should do output");
+                SimpleCords spawnlocation = item.CenterLocation.OffsetBy(item.Output.DeliveryLocation);
+                string materialName = item.Output.MaterialName;
+                Tile t = space.Map.SaveGet(spawnlocation.x, spawnlocation.z);
+                if (t.occupation == TileOccupation.Empty)
+                {
+                    BaseMaterial mat = materials.GetMaterialByName(materialName);
+                    space.SpawnMaterial(mat, spawnlocation);
 
+                    item.Output.TimeToGo = item.Output.DeliverTimer;
+                    item.Clock.SetTimer(item.Output.TimeToGo);
+
+                    if (!item.Input.enabled)
+                    {
+                        item.Output.ConsumeToGo = item.Output.ConsumeAmount;
+                        item.Input.ConsumeToGo = item.Input.ConsumeAmount;
+                    }
+                }
+            }
+            
+        }
+        ReportDone();
     }
 
     void ShowPossibleBuildings()
     {
+        List<DetectedBuilding> possible = BuildingDetector.DetectBuildings(space, blueprints);
+        Debug.Log(possible.Count+" Buildings found");
+        foreach (var item in possible)
+        {
+            if (item != null)
+            {
+                
+                GameObject h = GameObject.Instantiate(ResourceLibrary.GetPrefabByName("prop_Hammer"));
+                possibleBuildingHammer.Add(h);
+                h.transform.position = item.Location;
+                BuildMe script = h.GetComponentInChildren<BuildMe>();
+                script.Information = item;
+                script.clicker = () =>
+                {
+                    BuildBuilding(item);
+                };
+            }            
+        }
+        ReportDone();
+    }
 
+    private void BuildBuilding(DetectedBuilding detectedBuilding)
+    {
+        BaseBuilding b = buildings.GetBuildingByName(detectedBuilding.BuildingName);        
+        foreach (var item in b.occupying)
+        {
+            SimpleCords cords = detectedBuilding.Location.OffsetBy(item);
+            Debug.Log(cords);
+            RemoveMaterial(space.Map.SaveGet(cords.x,cords.z));
+        }
+        space.SpawnBuilding(b, detectedBuilding.Location, detectedBuilding.Orientation);
+
+        AdvanceToProcessing();
     }
 
     void ShowPossibleDroplocations()
