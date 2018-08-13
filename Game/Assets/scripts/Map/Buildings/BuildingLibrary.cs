@@ -207,6 +207,49 @@ public class BuildingLibrary {
                 MaterialName = "Monster Teeth"
             }
         } },
+        {"Marketplace", new BaseBuilding
+        {
+            Name = "Marketplace",
+            VisualName = "building_Marketplace",
+            occupying = new Offset[]
+            {
+                new Offset(0,0),
+                new Offset(-1,0),
+                new Offset(1,0),
+                new Offset(0,-1),
+                new Offset(-1,-1)
+            },
+            Input = new MaterialInput(),
+            Output = new MaterialOutput()
+            {
+                enabled = true,
+                HasToConsume = false,
+                DeliverTimer = 3,
+                DeliveryLocation = new Offset(0,1),
+                MaterialName = "Spices"
+            }
+        } },
+        {"Tavern", new BaseBuilding
+        {
+            Name = "Tavern",
+            VisualName = "building_Tavern",
+            occupying = new Offset[]
+            {
+                new Offset(0,0),
+                new Offset(-1,0),
+                new Offset(1,0),
+                new Offset(-1,-1)
+            },
+            Input = new MaterialInput(),
+            Output = new MaterialOutput()
+            {
+                enabled = true,
+                HasToConsume = false,
+                DeliverTimer = 3,
+                DeliveryLocation = new Offset(0,1),
+                MaterialName = "Information"
+            }
+        } },
         // follow here with other entries
 
     };

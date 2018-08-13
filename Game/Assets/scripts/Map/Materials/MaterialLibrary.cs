@@ -56,6 +56,36 @@ public class MaterialLibrary  {
            Name = "Bones",
            VisualName = "material_Bones"
         } },
+        {"Monster Teeth", new BaseMaterial
+        {
+           Name = "Monster Teeth",
+           VisualName = "material_Monster Teeth"
+        } },
+        {"Iron", new BaseMaterial
+        {
+           Name = "Iron",
+           VisualName = "material_Iron"
+        } },
+        {"Spices", new BaseMaterial
+        {
+           Name = "Spices",
+           VisualName = "material_Spices"
+        } },
+        {"Information", new BaseMaterial
+        {
+           Name = "Information",
+           VisualName = "material_Information"
+        } },
+        {"Gold", new BaseMaterial
+        {
+           Name = "Gold",
+           VisualName = "material_Gold"
+        } },
+        {"Diamond", new BaseMaterial
+        {
+           Name = "Diamond",
+           VisualName = "material_Diamond"
+        } },
     };
 
 
