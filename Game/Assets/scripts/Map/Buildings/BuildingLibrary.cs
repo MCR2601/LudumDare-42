@@ -119,7 +119,7 @@ public class BuildingLibrary {
                 HasToConsume = false,
                 DeliverTimer = 3,
                 DeliveryLocation = new Offset(0,1),
-                MaterialName = "Stone drum"
+                MaterialName = "Stone Drum"
             }
         } },
         {"Well", new BaseBuilding
@@ -269,6 +269,22 @@ public class BuildingLibrary {
                 MaterialName = "Apple"
             }
         } },
+        {"Amazing Product",new BaseBuilding
+        {
+            Name = "Amazing Product",
+            VisualName = "building_Amazing Product",
+            occupying = new Offset[]
+            {
+                new Offset(0,0),
+                new Offset(-1,0),
+                new Offset(1,0),
+                new Offset(0,-1),
+                new Offset(-1,-1),
+                new Offset(0,1),
+            },
+            Input = new MaterialInput(),
+            Output = new MaterialOutput()
+        }}
         // follow here with other entries
 
     };

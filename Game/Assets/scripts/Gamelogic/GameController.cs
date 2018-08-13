@@ -146,10 +146,10 @@ public class GameController : MonoBehaviour {
             //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(4, 2));
             //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(4, 3));
 
-            space.SpawnBuilding(buildings.GetBuildingByName("Quarry"), new SimpleCords(3, 3),0);
-            space.SpawnMaterial(materials.GetMaterialByName("Stone"),new SimpleCords(0,0));
+            //space.SpawnBuilding(buildings.GetBuildingByName("Quarry"), new SimpleCords(3, 3),0);
+            //space.SpawnMaterial(materials.GetMaterialByName("Stone"),new SimpleCords(0,0));
 
-            //space.SpawnMaterial(materials.GetMaterialByName("Dirt"),new SimpleCords(3,2));
+            space.SpawnMaterial(materials.GetMaterialByName("Dirt"),new SimpleCords(3,2));
             AdvanceToProcessing();
             spawned = true;
         }

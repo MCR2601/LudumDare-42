@@ -26,7 +26,11 @@ public class lookAtCamera : MonoBehaviour {
         {
             Debug.Log("where is the animator?");
         }
-        anim.SetInteger("Number", number);
+        else
+        {
+            anim.SetInteger("Number", number);
+        }
+        
     }
 
 
