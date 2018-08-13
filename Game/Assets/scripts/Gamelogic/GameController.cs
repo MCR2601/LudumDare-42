@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -59,6 +60,9 @@ public class GameController : MonoBehaviour {
     public float requiredHoverTime = 0.5f;
     public bool isHoveringMaterial = false; // material or building
 
+    public float restart = 0f;
+    public float restartTime = 2f;
+
     private BaseMaterial hoverMaterial;
     private BaseBuilding hoverBuilding;
 
@@ -90,10 +94,23 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (Input.GetKey(KeyCode.R))
+        {
+            restart += Time.deltaTime;
+            if (restart > restartTime)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+        else
+        {
+            restart = 0f;
+        }
+
         MoveAllObjectsBack();
 
         //TODO delete this
-        if (!spawned && Time.time > 1 )
+        /*if (!spawned && Time.time > 1 )
         {
             Debug.Log("Something should have happend");
 
@@ -101,7 +118,7 @@ public class GameController : MonoBehaviour {
             space.SpawnMaterial(materials.GetMaterialByName("Dirt"), new SimpleCords(4, 1));
             space.SpawnMaterial(materials.GetMaterialByName("Dirt"), new SimpleCords(1, 3));
             spawned = true;
-        }
+        }*/
 
         
         RaycastHit hit;
@@ -152,18 +169,18 @@ public class GameController : MonoBehaviour {
                         {
                             case Tool.Shovel:
                                 int m = 1 << 10;
-                                Debug.Log("HELLO?");
+                                //Debug.Log("HELLO?");
                                 RaycastHit hit1;
                                 if (Physics.Raycast(ray, out hit1, 100, m))
                                 {
-                                    Debug.Log("hit something and i am starting to calculate");
-                                    Vector3 hitLoc = hit1.transform.position;
-                                    SimpleCords location = new SimpleCords((int)Mathf.Round(hitLoc.x), (int)originLocation.y, (int)Mathf.Round(hitLoc.z));
+                                    
+                                    Vector3 hitLoc = hit1.point;
+                                    SimpleCords location = new SimpleCords((int)Mathf.Round(hitLoc.x), (int)0, (int)Mathf.Round(hitLoc.z));
                                     Tile t = space.Map.SaveGet(location.x, location.z);
-
+                                    //Debug.Log("Shovel attack"+hitLoc);
                                     if (t.occupation == TileOccupation.Empty)
                                     {
-                                        space.SpawnMaterial(materials.GetMaterialByName("material_Dirt"), t.position);
+                                        space.SpawnMaterial(materials.GetMaterialByName("Dirt"), t.position);
                                     }
                                     activeTool = Tool.Move;
                                     txt.text = "Move";
@@ -484,6 +501,7 @@ public class GameController : MonoBehaviour {
         if (t.occupation == TileOccupation.Material)
         {
             t.occupation = TileOccupation.Empty;
+            space.Materials.Remove(t.Material);
             ObjectsToReturn.RemoveAll((x) => { return x.Key == t.Material.GameObject; });
             Destroy(t.Material.GameObject);
             t.Material = null;            
@@ -502,6 +520,7 @@ public class GameController : MonoBehaviour {
                     tile.occupation = TileOccupation.Empty;
                 }
             }
+            space.Buildings.Remove(t.Building);
             Destroy(b.GameObject);            
         }
     }

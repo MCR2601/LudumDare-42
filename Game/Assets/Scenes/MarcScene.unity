@@ -879,6 +879,8 @@ MonoBehaviour:
   isHovering: 0
   requiredHoverTime: 0.5
   isHoveringMaterial: 0
+  restart: 0
+  restartTime: 2
   btn1: {fileID: 511199758}
   btn2: {fileID: 2045966175}
   btn3: {fileID: 1039608175}
