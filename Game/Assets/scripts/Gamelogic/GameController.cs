@@ -110,15 +110,26 @@ public class GameController : MonoBehaviour {
         MoveAllObjectsBack();
 
         //TODO delete this
-        /*if (!spawned && Time.time > 1 )
+        if (!spawned && Time.time > 1 )
         {
             Debug.Log("Something should have happend");
 
-            space.SpawnMaterial(materials.GetMaterialByName("Dirt"), new SimpleCords(1, 1));
-            space.SpawnMaterial(materials.GetMaterialByName("Dirt"), new SimpleCords(4, 1));
-            space.SpawnMaterial(materials.GetMaterialByName("Dirt"), new SimpleCords(1, 3));
+            //space.SpawnMaterial(materials.GetMaterialByName("Dirt"), new SimpleCords(1, 1));
+            //space.SpawnMaterial(materials.GetMaterialByName("Dirt"), new SimpleCords(4, 1));
+            //space.SpawnMaterial(materials.GetMaterialByName("Dirt"), new SimpleCords(1, 3));
+
+            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(0, 2));
+            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(0, 3));
+
+            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(2, 2));
+            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(2, 3));
+
+            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(4, 2));
+            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(4, 3));
+
+
             spawned = true;
-        }*/
+        }
 
         
         RaycastHit hit;
@@ -509,7 +520,7 @@ public class GameController : MonoBehaviour {
         if (t.occupation == TileOccupation.Building)
         {
             BaseBuilding b = t.Building;
-
+            Destroy(b.Clock.gameObject);
             foreach (var item in b.occupying)
             {
                 SimpleCords removLoc = b.CenterLocation.OffsetBy(item);
@@ -637,7 +648,7 @@ public class GameController : MonoBehaviour {
             }
             else
             {
-                Debug.Log(item.Output.TimeToGo);
+                //Debug.Log(item.Output.TimeToGo);
                 if (item.Output.TimeToGo == -1)
                 {
                     item.Clock.SetTimer(item.Output.DeliverTimer);
@@ -719,7 +730,7 @@ public class GameController : MonoBehaviour {
         foreach (var item in b.occupying)
         {
             SimpleCords cords = detectedBuilding.Location.OffsetBy(item.Rotate(detectedBuilding.Orientation));
-            Debug.Log(cords);
+            Debug.Log("occupying: "+cords);
             RemoveOccupation(space.Map.SaveGet(cords.x,cords.z));
         }
         space.SpawnBuilding(b, detectedBuilding.Location, detectedBuilding.Orientation);

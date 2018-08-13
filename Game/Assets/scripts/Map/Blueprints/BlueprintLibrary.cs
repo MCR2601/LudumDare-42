@@ -351,7 +351,7 @@ public class BlueprintLibrary  {
     {
         if (library.ContainsKey(name))
         {
-            return library[name];
+            return library[name].GetSaveCopy();
         }
         return null;
     }
@@ -362,7 +362,7 @@ public class BlueprintLibrary  {
 
         foreach (var item in library)
         {
-            list.Add(item.Value);
+            list.Add(item.Value.GetSaveCopy());
         }
         return list;
     }

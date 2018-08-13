@@ -23,7 +23,7 @@ public static class BuildingDetector{
                     // rotate 
                     for (int i = 0; i < 4; i++)
                     {                        
-                        if (CheckBlueprint(Map, item, cord,i ))
+                        if (CheckBlueprint(Map, item, cord, i ))
                         {
                             possibleBuildings.Add(new DetectedBuilding(item.Name, cord, i));
                         }

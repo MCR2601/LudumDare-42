@@ -45,6 +45,16 @@ public class BaseBuilding {
             VisualName = VisualName
         };
 
+        bb.Input = new MaterialInput()
+        {
+            ConsumeAmount = Input.ConsumeAmount,
+            enabled = Input.enabled,
+            InputLocation = new Offset(Input.InputLocation.x, Input.InputLocation.y),
+            MaterialName = Input.MaterialName
+        };
+
+
+
         return bb;
     }
 
@@ -68,6 +78,9 @@ public class BaseBuilding {
             Clock = t.GetComponentInChildren<lookAtCamera>();
             Timer = t;
 
+            Input.InputLocation = Input.InputLocation.Rotate(Orientatation);
+            Output.DeliveryLocation = Output.DeliveryLocation.Rotate(Orientatation);
+
             if (Input.enabled)
             {
                 Clock.SetTimer(-1);
@@ -76,7 +89,6 @@ public class BaseBuilding {
             {
                 Clock.SetTimer(Output.DeliverTimer);
             }
-            // TODO: Rotation
             // TODO: Place Object with everything
         }
         else
