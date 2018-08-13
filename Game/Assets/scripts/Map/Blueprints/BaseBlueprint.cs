@@ -90,10 +90,6 @@ public class BaseBlueprint  {
         }
     }
 
-
-
-
-
     public BaseBlueprint()
     {
 
@@ -117,6 +113,18 @@ public class BaseBlueprint  {
             }
         }
         return materials;
+    }
+
+    public BaseBlueprint GetSaveCopy()
+    {
+        BaseBlueprint blueprint = new BaseBlueprint();
+        blueprint.Name = Name;
+        blueprint.MaterialRequirements = new List<MaterialOffset>();
+        foreach (var item in MaterialRequirements)
+        {
+            blueprint.MaterialRequirements.Add(new MaterialOffset() { MaterialName = item.MaterialName, Offset = new Offset(item.Offset.x, item.Offset.y) });
+        }
+        return blueprint;
     }
 
 

@@ -51,11 +51,10 @@ public static class HelperMethodes {
         foreach (var item in set)
         {
             Offset offset = new Offset(item.Offset.x, item.Offset.y);
-            for (int i = 0; i < turnAmount; i++)
-            {
-                // this is some mathematical stuff, very fun but a bit confusing
-                offset = new Offset(offset.x - (offset.x - offset.y), offset.y - (offset.x + offset.y));
-            }
+            
+            // this is some mathematical stuff, very fun but a bit confusing
+            offset = offset.Rotate(turnAmount);
+            
             newList.Add(new MaterialOffset() { MaterialName = item.MaterialName, Offset = offset});
         }
         return newList;

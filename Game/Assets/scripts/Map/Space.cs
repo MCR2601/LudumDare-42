@@ -87,7 +87,8 @@ public class Space {
         Map[location.x, location.z].occupation = TileOccupation.Building;
 
         foreach (var item in building.occupying)
-        {            
+        {
+            Debug.Log("Spawn Building with orientation: " + orientation);
             SimpleCords c = location.OffsetBy(item.Rotate(orientation));
             Map[c.x, c.z].Building = building;
             Map[c.x, c.z].occupation = TileOccupation.Building;
