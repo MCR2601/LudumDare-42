@@ -17,6 +17,11 @@ public class TooltipScript : MonoBehaviour {
 
     Animator anim;
 
+    GameObject Output;
+
+    GameObject Input;
+
+
 
     // Use this for initialization
     void Start () {

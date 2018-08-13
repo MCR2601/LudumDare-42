@@ -36,7 +36,7 @@ public class MaterialOutput{
     /// <summary>
     /// How long time is remaining until delivery
     /// </summary>
-    public int TimeToGo = -0;
+    public int TimeToGo = -1;
     /// <summary>
     /// How many Materials are remaining for consumption
     /// </summary>

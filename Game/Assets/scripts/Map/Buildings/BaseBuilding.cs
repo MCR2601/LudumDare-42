@@ -68,8 +68,14 @@ public class BaseBuilding {
             Clock = t.GetComponentInChildren<lookAtCamera>();
             Timer = t;
 
-            Clock.SetTimer(Output.DeliverTimer);
-
+            if (Input.enabled)
+            {
+                Clock.SetTimer(-1);
+            }
+            else
+            {
+                Clock.SetTimer(Output.DeliverTimer);
+            }
             // TODO: Rotation
             // TODO: Place Object with everything
         }
