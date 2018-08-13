@@ -221,7 +221,7 @@ public class GameController : MonoBehaviour {
                                 }
                                 else
                                 {
-                                    if (t.occupation == TileOccupation.Building && !isHoveringMaterial && t.Building == hoverBuilding)
+                                    if (t.occupation == TileOccupation.Building && isHoveringMaterial && t.Building == hoverBuilding)
                                     {
                                         // still hovering over the same Building
                                     }
