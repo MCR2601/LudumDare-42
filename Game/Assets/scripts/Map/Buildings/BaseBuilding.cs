@@ -37,9 +37,6 @@ public class BaseBuilding {
     {
         BaseBuilding bb = new BaseBuilding
         {
-            Input = Input,
-            Output = Output,
-            occupying = occupying,
             usable = true,
             Name = Name,
             VisualName = VisualName
@@ -52,8 +49,20 @@ public class BaseBuilding {
             InputLocation = new Offset(Input.InputLocation.x, Input.InputLocation.y),
             MaterialName = Input.MaterialName
         };
-
-
+        bb.Output = new MaterialOutput()
+        {
+            ConsumeAmount = Output.ConsumeAmount,
+            DeliverTimer = Output.DeliverTimer,
+            enabled = Output.enabled,
+            DeliveryLocation = new Offset(Output.DeliveryLocation.x, Output.DeliveryLocation.y),
+            HasToConsume = Output.HasToConsume,
+            MaterialName = Output.MaterialName
+        };
+        bb.occupying = new Offset[occupying.Length];
+        for (int i = 0; i < occupying.Length; i++)
+        {
+            bb.occupying[i] = new Offset(occupying[i].x, occupying[i].y);
+        }       
 
         return bb;
     }
