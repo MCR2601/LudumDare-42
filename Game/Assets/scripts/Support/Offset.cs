@@ -18,4 +18,15 @@ public struct Offset
         return "{X:" + x + ",Y" + y+ "}";
     }
 
+    public Offset Rotate(int amount)
+    {
+        Offset offset = new Offset(x, y);
+
+        for (int x = 0; x < amount; x++)
+        {
+            offset = new Offset(offset.x - (offset.x - offset.y), offset.y - (offset.x + offset.y));
+        }
+        return  offset;
+    }
+
 }
