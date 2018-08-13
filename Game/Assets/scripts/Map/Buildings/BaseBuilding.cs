@@ -52,8 +52,16 @@ public class BaseBuilding {
     {
         if (usable)
         {
+            Orientatation = rotation;
+
+            for (int i = 0; i < occupying.Length; i++)
+            {
+                occupying[i] = occupying[i].Rotate(Orientatation);
+            }
+
             GameObject obj = Object.Instantiate(ResourceLibrary.GetPrefabByName(VisualName));
             obj.transform.position = atLocation;
+            obj.transform.rotation = Quaternion.Euler(0,90 * (rotation+1), 0);
             GameObject = obj;
             GameObject t = Object.Instantiate(ResourceLibrary.GetPrefabByName("prop_Timer"));
             t.transform.position = atLocation;

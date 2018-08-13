@@ -594,7 +594,7 @@ public class GameController : MonoBehaviour {
         BaseBuilding b = buildings.GetBuildingByName(detectedBuilding.BuildingName);        
         foreach (var item in b.occupying)
         {
-            SimpleCords cords = detectedBuilding.Location.OffsetBy(item);
+            SimpleCords cords = detectedBuilding.Location.OffsetBy(item.Rotate(detectedBuilding.Orientation));
             Debug.Log(cords);
             RemoveMaterial(space.Map.SaveGet(cords.x,cords.z));
         }
