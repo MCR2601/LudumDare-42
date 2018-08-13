@@ -339,6 +339,66 @@ public class BlueprintLibrary  {
                 }
             }
         } },
+        {"Amazing Product", new BaseBlueprint
+        {
+            Name = "Amazing Product",
+            MaterialRequirements = new List<MaterialOffset>
+            {
+                new MaterialOffset()
+                {
+                   MaterialName = "Diamond",
+                   Offset = new Offset(0,0)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Stone",
+                    Offset = new Offset(0,1)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Paper",
+                    Offset = new Offset(-1,0)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Bones",
+                    Offset = new Offset(-1,1)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Monster Tooth",
+                    Offset = new Offset(0,-1)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Iron",
+                    Offset = new Offset(1,1)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Gold",
+                    Offset = new Offset(1,0)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Beef",
+                    Offset = new Offset(1,-1)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Information",
+                    Offset = new Offset(-1,-1)
+                }
+            }
+        } },
     };
 
     public BlueprintLibrary()
