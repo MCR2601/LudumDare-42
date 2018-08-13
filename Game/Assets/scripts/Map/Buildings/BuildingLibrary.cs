@@ -250,6 +250,25 @@ public class BuildingLibrary {
                 MaterialName = "Information"
             }
         } },
+        {"Apple Collector", new BaseBuilding
+        {
+            Name = "Apple Collector",
+            VisualName = "building_Apple Collector",
+            occupying = new Offset[]
+            {
+                new Offset(0,0),
+                new Offset(1,0)
+            },
+            Input = new MaterialInput(),
+            Output = new MaterialOutput()
+            {
+                enabled = true,
+                HasToConsume = false,
+                DeliverTimer = 3,
+                DeliveryLocation = new Offset(0,1),
+                MaterialName = "Apple"
+            }
+        } },
         // follow here with other entries
 
     };
