@@ -74,6 +74,10 @@ public class GameController : MonoBehaviour {
 
     public Text txt;
 
+    public GameObject WinScreen;
+    public float winMet = 0f;
+    public bool winThere = false;
+    public float winDelay = 3f;
 
     // Use this for initialization
     void Start() {
@@ -107,8 +111,23 @@ public class GameController : MonoBehaviour {
             restart = 0f;
         }
 
-        MoveAllObjectsBack();
+        if (space.GetAvaiableMaterial().ContainsKey("Amazing Product")||(Input.GetKey( KeyCode.B)&&Input.GetKey(KeyCode.M)))
+        {
+            winThere = true;
+        }
 
+        if (winThere)
+        {
+            winMet += Time.deltaTime;
+        }
+
+        if (winMet >= winDelay)
+        {
+            WinScreen.SetActive(true);
+        }
+
+        MoveAllObjectsBack();
+        
         //TODO delete this
         if (!spawned && Time.time > 1 )
         {
@@ -118,16 +137,17 @@ public class GameController : MonoBehaviour {
             //space.SpawnMaterial(materials.GetMaterialByName("Dirt"), new SimpleCords(4, 1));
             //space.SpawnMaterial(materials.GetMaterialByName("Dirt"), new SimpleCords(1, 3));
 
-            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(0, 2));
-            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(0, 3));
+            //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(0, 2));
+            //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(0, 3));
 
-            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(2, 2));
-            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(2, 3));
+            //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(2, 2));
+            //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(2, 3));
 
-            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(4, 2));
-            space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(4, 3));
+            //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(4, 2));
+            //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(4, 3));
 
-
+            space.SpawnMaterial(materials.GetMaterialByName("Dirt"),new SimpleCords(3,2));
+            AdvanceToProcessing();
             spawned = true;
         }
 
