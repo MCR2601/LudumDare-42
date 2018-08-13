@@ -33,7 +33,7 @@ public class MaterialLibrary  {
         } },
         {"Stone drum", new BaseMaterial
         {
-           Name = "Stone drum",
+           Name = "Stone Drum",
            VisualName = "material_Stone drum"
         } },
         {"Water", new BaseMaterial

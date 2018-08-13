@@ -321,6 +321,24 @@ public class BlueprintLibrary  {
                 }
             }
         } },
+        {"Apple Collector", new BaseBlueprint
+        {
+            Name = "Apple Collector",
+            MaterialRequirements = new List<MaterialOffset>
+            {
+                new MaterialOffset()
+                {
+                   MaterialName = "Wood",
+                   Offset = new Offset(0,0)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Stone Drum",
+                    Offset = new Offset(1,0)
+                }
+            }
+        } },
     };
 
     public BlueprintLibrary()
