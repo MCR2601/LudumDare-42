@@ -48,7 +48,7 @@ public class BlueprintLibrary  {
             {
                 new MaterialOffset()
                 {
-                   MaterialName = "Wood",
+                   MaterialName = "Woodd",
                    Offset = new Offset(0,0)
                 },
                 new MaterialOffset()
@@ -65,7 +65,7 @@ public class BlueprintLibrary  {
             {
                 new MaterialOffset()
                 {
-                   MaterialName = "Wood",
+                   MaterialName = "Woodd",
                    Offset = new Offset(0,0)
                 }
                 ,
@@ -113,13 +113,13 @@ public class BlueprintLibrary  {
             {
                 new MaterialOffset()
                 {
-                   MaterialName = "Iron",
+                   MaterialName = "Stone",
                    Offset = new Offset(0,0)
                 }
                 ,
                 new MaterialOffset()
                 {
-                    MaterialName = "Stone",
+                    MaterialName = "Wood",
                     Offset = new Offset(1,0)
                 }
                 ,
@@ -227,7 +227,7 @@ public class BlueprintLibrary  {
                 ,
                 new MaterialOffset()
                 {
-                    MaterialName = "Iron",
+                    MaterialName = "Stone",
                     Offset = new Offset(0,-1)
                 }
                 ,
@@ -286,7 +286,7 @@ public class BlueprintLibrary  {
                 ,
                 new MaterialOffset()
                 {
-                    MaterialName = "Gold",
+                    MaterialName = "Bones",
                     Offset = new Offset(0,-1)
                 }
             }
@@ -298,7 +298,7 @@ public class BlueprintLibrary  {
             {
                 new MaterialOffset()
                 {
-                   MaterialName = "Stone",
+                   MaterialName = "Stones",
                    Offset = new Offset(0,0)
                 }
                 ,
@@ -328,7 +328,7 @@ public class BlueprintLibrary  {
             {
                 new MaterialOffset()
                 {
-                   MaterialName = "Wood",
+                   MaterialName = "Woodd",
                    Offset = new Offset(0,0)
                 }
                 ,
@@ -346,41 +346,41 @@ public class BlueprintLibrary  {
             {
                 new MaterialOffset()
                 {
-                   MaterialName = "Diamond",
+                   MaterialName = "Monster Tooth",
                    Offset = new Offset(0,0)
                 }
                 ,
                 new MaterialOffset()
                 {
-                    MaterialName = "Stone",
+                    MaterialName = "Bones",
                     Offset = new Offset(0,1)
                 }
                 ,
                 new MaterialOffset()
                 {
-                    MaterialName = "Paper",
+                    MaterialName = "Spices",
                     Offset = new Offset(-1,0)
                 }
                 ,
                 new MaterialOffset()
                 {
-                    MaterialName = "Bones",
+                    MaterialName = "Stone drum",
                     Offset = new Offset(-1,1)
                 }
                 ,
                 new MaterialOffset()
                 {
-                    MaterialName = "Monster Tooth",
+                    MaterialName = "Water",
                     Offset = new Offset(0,-1)
                 }
                 ,
                 new MaterialOffset()
                 {
-                    MaterialName = "Iron",
+                    MaterialName = "Beef",
                     Offset = new Offset(1,1)
                 }
                 ,
-                new MaterialOffset()
+                /*new MaterialOffset()
                 {
                     MaterialName = "Gold",
                     Offset = new Offset(1,0)
@@ -396,7 +396,7 @@ public class BlueprintLibrary  {
                 {
                     MaterialName = "Information",
                     Offset = new Offset(-1,-1)
-                }
+                }*/
             }
         } },
     };
