@@ -56,10 +56,10 @@ public class MaterialLibrary  {
            Name = "Bones",
            VisualName = "material_Bones"
         } },
-        {"Monster Teeth", new BaseMaterial
+        {"Monster Tooth", new BaseMaterial
         {
-           Name = "Monster Teeth",
-           VisualName = "material_Monster Teeth"
+           Name = "Monster Tooth",
+           VisualName = "material_Monster Tooth"
         } },
         {"Iron", new BaseMaterial
         {
