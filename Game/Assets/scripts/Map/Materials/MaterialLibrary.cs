@@ -31,10 +31,10 @@ public class MaterialLibrary  {
            Name = "Stone",
            VisualName = "material_Stone"
         } },
-        {"Stone drum", new BaseMaterial
+        {"Stone Drum", new BaseMaterial
         {
            Name = "Stone Drum",
-           VisualName = "material_Stone drum"
+           VisualName = "material_StoneDrum"
         } },
         {"Water", new BaseMaterial
         {
@@ -59,7 +59,7 @@ public class MaterialLibrary  {
         {"Monster Tooth", new BaseMaterial
         {
            Name = "Monster Tooth",
-           VisualName = "material_Monster Tooth"
+           VisualName = "material_MonsterTooth"
         } },
         {"Iron", new BaseMaterial
         {

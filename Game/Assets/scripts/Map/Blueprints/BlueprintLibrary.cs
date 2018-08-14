@@ -126,7 +126,7 @@ public class BlueprintLibrary  {
                 new MaterialOffset()
                 {
                     MaterialName = "Stone",
-                    Offset = new Offset(-1,0)
+                    Offset = new Offset(2,0)
                 }
             }
         } },
@@ -328,7 +328,7 @@ public class BlueprintLibrary  {
             {
                 new MaterialOffset()
                 {
-                   MaterialName = "Woodd",
+                   MaterialName = "Wood",
                    Offset = new Offset(0,0)
                 }
                 ,

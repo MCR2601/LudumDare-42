@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour {
     /// <summary>
     /// where it originates
     /// </summary>
-    private SimpleCords originLocation;
+    private Vector3 originLocation;
     /// <summary>
     /// a list of all Gameobjects used to display possible droppoints
     /// </summary>
@@ -143,13 +143,16 @@ public class GameController : MonoBehaviour {
             //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(2, 2));
             //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(2, 3));
 
-            //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(4, 2));
-            //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(4, 3));
+            
+            space.SpawnMaterial(materials.GetMaterialByName("Wood"), new SimpleCords(4, 2));
+            space.SpawnMaterial(materials.GetMaterialByName("Stone"), new SimpleCords(4, 3));
+            space.SpawnMaterial(materials.GetMaterialByName("Stone"), new SimpleCords(4, 1));
 
             //space.SpawnBuilding(buildings.GetBuildingByName("Quarry"), new SimpleCords(3, 3),0);
             //space.SpawnMaterial(materials.GetMaterialByName("Stone"),new SimpleCords(0,0));
 
             space.SpawnMaterial(materials.GetMaterialByName("Dirt"),new SimpleCords(3,2));
+            
             AdvanceToProcessing();
             spawned = true;
         }
@@ -272,7 +275,7 @@ public class GameController : MonoBehaviour {
                                                 // we have to switch a lot around
                                                 isHolding = true;
                                                 moveState = MoveState.Raise;
-                                                originLocation = location;
+                                                originLocation = new Vector3(location.x,0.5f,location.z);
                                                 heldMaterial = t.Material;
                                                 holdPosition = location;
                                                 ShowPossibleDroplocations();
@@ -496,7 +499,7 @@ public class GameController : MonoBehaviour {
             MoveMaterial(originLocation, holdPosition, heldMaterial);
             // return to new location
             ObjectsToReturn.RemoveAll((x)=>x.Key==heldMaterial.GameObject);
-            ObjectsToReturn.Add(new KeyValuePair<GameObject, Vector3>(heldMaterial.GameObject, new Vector3(0, 0.50f, 0) + (Vector3)holdPosition));
+            ObjectsToReturn.Add(new KeyValuePair<GameObject, Vector3>(heldMaterial.GameObject, new Vector3(holdPosition.x, 0.50f, holdPosition.z)));
 
 
 
@@ -544,6 +547,7 @@ public class GameController : MonoBehaviour {
         {
             BaseBuilding b = t.Building;
             Destroy(b.Clock.gameObject);
+            space.Buildings.Remove(t.Building);
             foreach (var item in b.occupying)
             {
                 SimpleCords removLoc = b.CenterLocation.OffsetBy(item);
@@ -553,8 +557,7 @@ public class GameController : MonoBehaviour {
                     tile.Building = null;
                     tile.occupation = TileOccupation.Empty;
                 }
-            }
-            space.Buildings.Remove(t.Building);
+            }            
             Destroy(b.GameObject);            
         }
     }

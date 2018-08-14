@@ -72,7 +72,7 @@ public class Space {
     {
         Map[location.x, location.z].Material = material;
         Map[location.x, location.z].occupation = TileOccupation.Material;
-
+        Debug.Log(material + " at" + location);
         material.Place(location);
         Materials.Add(material);
     }

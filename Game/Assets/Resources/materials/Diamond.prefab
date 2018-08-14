@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33842990830378500}
   - component: {fileID: 23657852019461828}
   - component: {fileID: 65425575539588648}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4366953897211884}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}

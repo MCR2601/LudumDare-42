@@ -9,73 +9,74 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1663069803275726}
+  m_RootGameObject: {fileID: 1389832715299478}
   m_IsPrefabAsset: 1
---- !u!1 &1663069803275726
+--- !u!1 &1106729975361946
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4551068701822838}
-  m_Layer: 0
-  m_Name: Monster Tooth
+  - component: {fileID: 4090993114517958}
+  - component: {fileID: 33439926044268780}
+  - component: {fileID: 23669057024982994}
+  - component: {fileID: 64887939668647930}
+  m_Layer: 11
+  m_Name: Stone Drum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1798677221738960
+--- !u!1 &1389832715299478
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4227830296173600}
-  - component: {fileID: 33886721624886480}
-  - component: {fileID: 23874980904463598}
-  m_Layer: 0
-  m_Name: Amazing Product_Monster Tooth
+  - component: {fileID: 4895801967324068}
+  m_Layer: 11
+  m_Name: StoneDrum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4227830296173600
+--- !u!4 &4090993114517958
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1798677221738960}
-  m_LocalRotation: {x: -0.00000005338508, y: 0.7071068, z: -0.7071067, w: 0.000000053385072}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1106729975361946}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0.01}
   m_LocalScale: {x: 40, y: 40, z: 40}
   m_Children: []
-  m_Father: {fileID: 4551068701822838}
+  m_Father: {fileID: 4895801967324068}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4551068701822838
+--- !u!4 &4895801967324068
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1663069803275726}
+  m_GameObject: {fileID: 1389832715299478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4227830296173600}
+  - {fileID: 4090993114517958}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23874980904463598
+--- !u!23 &23669057024982994
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1798677221738960}
+  m_GameObject: {fileID: 1106729975361946}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,7 +86,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 40d4d98f3e63f8a49a32a35f7bd3bd26, type: 3}
+  - {fileID: 2100000, guid: 73cfaa7b697116d43b079f2290be3650, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,10 +106,24 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33886721624886480
+--- !u!33 &33439926044268780
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1798677221738960}
-  m_Mesh: {fileID: 4300000, guid: 40d4d98f3e63f8a49a32a35f7bd3bd26, type: 3}
+  m_GameObject: {fileID: 1106729975361946}
+  m_Mesh: {fileID: 4300000, guid: 31b202ec0b2161747b2d3a856609e99d, type: 3}
+--- !u!64 &64887939668647930
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1106729975361946}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 31b202ec0b2161747b2d3a856609e99d, type: 3}

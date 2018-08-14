@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4317260599948446}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4496184446880974}
   - component: {fileID: 33695702635283524}
   - component: {fileID: 23042932596111510}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4163767398424342}
   - component: {fileID: 33144361402141456}
   - component: {fileID: 23856493542195568}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cone.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4365371489477356}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Amazing Product_Bones
   m_TagString: Untagged
   m_Icon: {fileID: 0}

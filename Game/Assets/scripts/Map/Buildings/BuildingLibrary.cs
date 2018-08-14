@@ -109,7 +109,7 @@ public class BuildingLibrary {
             occupying = new Offset[]
             {
                 new Offset(0,0),
-                new Offset(-1,0),
+                new Offset(2,0),
                 new Offset(1,0)
             },
             Input = new MaterialInput(),
@@ -118,7 +118,7 @@ public class BuildingLibrary {
                 enabled = true,
                 HasToConsume = false,
                 DeliverTimer = 3,
-                DeliveryLocation = new Offset(0,1),
+                DeliveryLocation = new Offset(1,1),
                 MaterialName = "Stone Drum"
             }
         } },

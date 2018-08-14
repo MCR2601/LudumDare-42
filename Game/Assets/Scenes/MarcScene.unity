@@ -373,7 +373,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 947208526}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.35068548
+  m_Size: 0.35664615
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -910,48 +910,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 190308645}
   m_CullTransparentMesh: 0
---- !u!1001 &205419559
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4678053308353114, guid: 8e2bffcbe60e27e4f9e8063081d5f641, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4678053308353114, guid: 8e2bffcbe60e27e4f9e8063081d5f641, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4678053308353114, guid: 8e2bffcbe60e27e4f9e8063081d5f641, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4678053308353114, guid: 8e2bffcbe60e27e4f9e8063081d5f641, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4678053308353114, guid: 8e2bffcbe60e27e4f9e8063081d5f641, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4678053308353114, guid: 8e2bffcbe60e27e4f9e8063081d5f641, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4678053308353114, guid: 8e2bffcbe60e27e4f9e8063081d5f641, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4678053308353114, guid: 8e2bffcbe60e27e4f9e8063081d5f641, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8e2bffcbe60e27e4f9e8063081d5f641, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &229497731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,7 +1668,7 @@ RectTransform:
   m_Father: {fileID: 859704557}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.6493145}
+  m_AnchorMin: {x: 0, y: 0.6433538}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
