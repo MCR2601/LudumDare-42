@@ -137,7 +137,7 @@ public class BlueprintLibrary  {
             {
                 new MaterialOffset()
                 {
-                   MaterialName = "Stone drum",
+                   MaterialName = "Stone Drum",
                    Offset = new Offset(0,0)
                 }
                 ,
@@ -263,31 +263,31 @@ public class BlueprintLibrary  {
                 new MaterialOffset()
                 {
                    MaterialName = "Wood",
-                   Offset = new Offset(0,0)
+                   Offset = new Offset(1,0)
                 }
                 ,
                 new MaterialOffset()
                 {
                     MaterialName = "Stone",
-                    Offset = new Offset(1,0)
+                    Offset = new Offset(1,1)
                 }
                 ,
                 new MaterialOffset()
                 {
                     MaterialName = "Stone",
-                    Offset = new Offset(-1,0)
+                    Offset = new Offset(1,1)
                 }
                 ,
                 new MaterialOffset()
                 {
                     MaterialName = "Apple",
-                    Offset = new Offset(-1,1)
+                    Offset = new Offset(0,1)
                 }
                 ,
                 new MaterialOffset()
                 {
                     MaterialName = "Bones",
-                    Offset = new Offset(0,-1)
+                    Offset = new Offset(0,0)
                 }
             }
         } },
@@ -346,38 +346,38 @@ public class BlueprintLibrary  {
             {
                 new MaterialOffset()
                 {
-                   MaterialName = "Monster Tooth",
+                   MaterialName = "Water",
                    Offset = new Offset(0,0)
                 }
                 ,
                 new MaterialOffset()
                 {
-                    MaterialName = "Bones",
+                    MaterialName = "Beef",
                     Offset = new Offset(0,1)
                 }
                 ,
                 new MaterialOffset()
                 {
-                    MaterialName = "Spices",
-                    Offset = new Offset(-1,0)
-                }
-                ,
-                new MaterialOffset()
-                {
-                    MaterialName = "Stone drum",
-                    Offset = new Offset(-1,1)
-                }
-                ,
-                new MaterialOffset()
-                {
-                    MaterialName = "Water",
+                    MaterialName = "Stone Drum",
                     Offset = new Offset(0,-1)
                 }
                 ,
                 new MaterialOffset()
                 {
-                    MaterialName = "Beef",
+                    MaterialName = "Spices",
                     Offset = new Offset(1,1)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Monster Tooth",
+                    Offset = new Offset(1,0)
+                }
+                ,
+                new MaterialOffset()
+                {
+                    MaterialName = "Bones",
+                    Offset = new Offset(1,-1)
                 }
                 ,
                 /*new MaterialOffset()

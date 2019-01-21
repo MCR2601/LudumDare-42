@@ -18,4 +18,15 @@ public class clickme : MonoBehaviour {
     {
         GetComponentInParent<BuildMe>().OnMouseDown();
     }
+
+    public void OnMouseEnter()
+    {
+        GetComponentInParent<BuildMe>().OnMouseEnter();
+    }
+
+    public void OnMouseExit()
+    {
+        GetComponentInParent<BuildMe>().OnMouseExit();
+    }
+
 }

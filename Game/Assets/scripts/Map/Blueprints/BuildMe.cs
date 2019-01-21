@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BuildMe : MonoBehaviour {
 
+
+
 	// Use this for initialization
 	void Start () {
 		
@@ -25,6 +27,17 @@ public class BuildMe : MonoBehaviour {
             clicker();
         }
     }
-    
+
+    public void OnMouseEnter()
+    {
+        
+    }
+
+    public void OnMouseExit()
+    {
+        
+    }
+
+
 
 }

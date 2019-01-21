@@ -71,4 +71,8 @@ public class TooltipScript : MonoBehaviour {
         Consumes.text = building.Input.enabled ? "Consumes: "+building.Input.ConsumeAmount + "x " + building.Input.MaterialName : "Consumes: None";
         Produces.text = "Produces: " + building.Output.MaterialName + " (" + building.Output.DeliverTimer + " turns)";
     }
+    public void ShowToolTipHammer()
+    {
+
+    }
 }

@@ -58,13 +58,15 @@ public class GameController : MonoBehaviour {
     public float hoverTime = 0f;
     public bool isHovering = false;
     public float requiredHoverTime = 0.5f;
-    public bool isHoveringMaterial = false; // material or building
+    public int isHoveringMaterial = 0; // 0 - material; 1 - building; 2 - hammer
+
 
     public float restart = 0f;
     public float restartTime = 2f;
 
     private BaseMaterial hoverMaterial;
     private BaseBuilding hoverBuilding;
+    private BuildMe hoverHammer;
 
     private List<GameObject> possibleBuildingHammer = new List<GameObject>();
 
@@ -111,7 +113,7 @@ public class GameController : MonoBehaviour {
             restart = 0f;
         }
 
-        if (space.GetAvaiableMaterial().ContainsKey("Amazing Product")||(Input.GetKey( KeyCode.B)&&Input.GetKey(KeyCode.M)))
+        if (space.Buildings.FindAll((x)=>x.Name == "Amazing Product").Count > 0||(Input.GetKey( KeyCode.B)&&Input.GetKey(KeyCode.M)))
         {
             winThere = true;
         }
@@ -127,9 +129,9 @@ public class GameController : MonoBehaviour {
         }
 
         MoveAllObjectsBack();
-        
+
         //TODO delete this
-        if (!spawned && Time.time > 1 )
+        if (!spawned && Time.time > 1)
         {
             Debug.Log("Something should have happend");
 
@@ -143,16 +145,22 @@ public class GameController : MonoBehaviour {
             //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(2, 2));
             //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(2, 3));
 
-            
-            space.SpawnMaterial(materials.GetMaterialByName("Wood"), new SimpleCords(4, 2));
-            space.SpawnMaterial(materials.GetMaterialByName("Stone"), new SimpleCords(4, 3));
-            space.SpawnMaterial(materials.GetMaterialByName("Stone"), new SimpleCords(4, 1));
+            // testing region
+            //space.SpawnMaterial(materials.GetMaterialByName("Spices"), new SimpleCords(4, 3));
+            //space.SpawnMaterial(materials.GetMaterialByName("Monster Tooth"), new SimpleCords(4, 2));
+            //space.SpawnMaterial(materials.GetMaterialByName("Bones"), new SimpleCords(4, 1));
+            //space.SpawnMaterial(materials.GetMaterialByName("Beef"), new SimpleCords(3, 3));
+            //space.SpawnMaterial(materials.GetMaterialByName("Water"), new SimpleCords(3, 2));
+            //space.SpawnMaterial(materials.GetMaterialByName("Stone Drum"), new SimpleCords(3, 1));
+            //space.SpawnMaterial(materials.GetMaterialByName("Stone"), new SimpleCords(2, 3));
+            //space.SpawnMaterial(materials.GetMaterialByName("Clay"), new SimpleCords(2, 2));
+            //space.SpawnMaterial(materials.GetMaterialByName("Stone"), new SimpleCords(2, 1));
 
-            //space.SpawnBuilding(buildings.GetBuildingByName("Quarry"), new SimpleCords(3, 3),0);
-            //space.SpawnMaterial(materials.GetMaterialByName("Stone"),new SimpleCords(0,0));
+
+
 
             space.SpawnMaterial(materials.GetMaterialByName("Dirt"),new SimpleCords(3,2));
-            
+
             AdvanceToProcessing();
             spawned = true;
         }
@@ -236,7 +244,7 @@ public class GameController : MonoBehaviour {
                                         Vector3 hitLoc = hit.transform.position;
                                         SimpleCords location = new SimpleCords((int)Mathf.Round(hitLoc.x), (int)originLocation.y, (int)Mathf.Round(hitLoc.z));
 
-                                        bool contains = false;
+                                        
                                         for (int i = 0; i < possiblePositions.Count; i++)
                                         {
                                             if (possiblePositions[i].Equals(location))
@@ -316,7 +324,7 @@ public class GameController : MonoBehaviour {
                     }
                     else
                     {
-                        // if we were holding something lets put it back
+                        // if we were holding something lets put it down
                         DropMaterial();
 
 
@@ -324,97 +332,118 @@ public class GameController : MonoBehaviour {
                         int hitmask = 1 << 11 | 1 << 10;
                         if (Physics.Raycast(ray, out hit, 100, hitmask))
                         {
-
+                            
                             Vector3 hitLoc = hit.transform.position;
                             SimpleCords location = new SimpleCords((int)Mathf.Round(hitLoc.x), (int)Mathf.Round(hitLoc.y), (int)Mathf.Round(hitLoc.z));
                             Tile t = space.Map.SaveGet(location.x, location.z);
                             //Debug.Log(t.occupation);
                             if (isHovering)
                             {
-                                if (t.occupation == TileOccupation.Material && isHoveringMaterial && t.Material == hoverMaterial)
+                                if (hit.transform.gameObject.GetComponentInParent<BuildMe>() != null && isHoveringMaterial == 2 && hit.transform.gameObject.GetComponentInParent<BuildMe>()==hoverHammer)
                                 {
-                                    // still hovering over the same Material                        
+                                    // still hovering over the same hammer
                                 }
                                 else
                                 {
-                                    if (t.occupation == TileOccupation.Building && isHoveringMaterial && t.Building == hoverBuilding)
+                                    if (t.occupation == TileOccupation.Material && isHoveringMaterial == 0 && t.Material == hoverMaterial)
                                     {
-                                        // still hovering over the same Building
+                                        // still hovering over the same Material                        
                                     }
                                     else
                                     {
-                                        // we are not hovering over the same anymore
-                                        // hide tooltip and so on
-                                        toolTip.HideToolTip();
-                                        isHovering = false;
-                                        hoverTime = 0f;
-                                        switch (t.occupation)
+                                        if (t.occupation == TileOccupation.Building && isHoveringMaterial == 1 && t.Building == hoverBuilding)
                                         {
-                                            case TileOccupation.Empty:
-                                                break;
-                                            case TileOccupation.Material:
-                                                // new material
-                                                isHoveringMaterial = true;
-                                                hoverMaterial = t.Material;
-                                                break;
-                                            case TileOccupation.Building:
-                                                // new building
-                                                isHoveringMaterial = false;
-                                                hoverBuilding = t.Building;
-                                                break;
-                                            case TileOccupation.Error:
-                                                break;
-                                            default:
-                                                break;
+                                            // still hovering over the same Building
+                                        }
+                                        else
+                                        {
+                                            // we are not hovering over the same anymore
+                                            // hide tooltip and so on
+                                            toolTip.HideToolTip();
+                                            isHovering = false;
+                                            hoverTime = 0f;
+                                            switch (t.occupation)
+                                            {
+                                                case TileOccupation.Empty:
+                                                    break;
+                                                case TileOccupation.Material:
+                                                    // new material
+                                                    isHoveringMaterial = 0;
+                                                    hoverMaterial = t.Material;
+                                                    break;
+                                                case TileOccupation.Building:
+                                                    // new building
+                                                    isHoveringMaterial =1;
+                                                    hoverBuilding = t.Building;
+                                                    break;
+                                                case TileOccupation.Error:
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
                                         }
                                     }
-                                }
-
+                                }        
                             }
                             else
                             {
-                                if (t.occupation == TileOccupation.Material && isHoveringMaterial && t.Material == hoverMaterial)
+                                if (hit.transform.gameObject.GetComponentInParent<BuildMe>() != null && isHoveringMaterial == 2 && hit.transform.gameObject.GetComponentInParent<BuildMe>() == hoverHammer)
                                 {
                                     hoverTime += Time.deltaTime;
-                                    // still hovering over the same Material
-                                    if (hoverTime >= requiredHoverTime)
+
+                                    if (hoverTime >= requiredHoldTime)
                                     {
                                         isHovering = true;
-                                        toolTip.ShowToolTipMaterial(t.Material);
+                                        
                                     }
+
+
                                 }
                                 else
                                 {
-                                    if (t.occupation == TileOccupation.Building && isHoveringMaterial && t.Building == hoverBuilding)
+                                    if (t.occupation == TileOccupation.Material && isHoveringMaterial == 0 && t.Material == hoverMaterial)
                                     {
                                         hoverTime += Time.deltaTime;
-                                        // still hovering over the same Building
+                                        // still hovering over the same Material
                                         if (hoverTime >= requiredHoverTime)
                                         {
                                             isHovering = true;
-                                            toolTip.ShowToolTipBuilding(t.Building);
+                                            toolTip.ShowToolTipMaterial(t.Material);
                                         }
                                     }
                                     else
                                     {
-                                        isHovering = false;
-                                        hoverTime = 0f;
-                                        switch (t.occupation)
+                                        if (t.occupation == TileOccupation.Building && isHoveringMaterial == 1 && t.Building == hoverBuilding)
                                         {
-                                            case TileOccupation.Material:
-                                                // new material
-                                                isHoveringMaterial = true;
-                                                hoverMaterial = t.Material;
-                                                break;
-                                            case TileOccupation.Building:
-                                                // new building
-                                                isHoveringMaterial = false;
-                                                hoverBuilding = t.Building;
-                                                break;
-                                            default:
-                                                hoverBuilding = null;
-                                                hoverMaterial = null;
-                                                break;
+                                            hoverTime += Time.deltaTime;
+                                            // still hovering over the same Building
+                                            if (hoverTime >= requiredHoverTime)
+                                            {
+                                                isHovering = true;
+                                                toolTip.ShowToolTipBuilding(t.Building);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            isHovering = false;
+                                            hoverTime = 0f;
+                                            switch (t.occupation)
+                                            {
+                                                case TileOccupation.Material:
+                                                    // new material
+                                                    isHoveringMaterial = 0;
+                                                    hoverMaterial = t.Material;
+                                                    break;
+                                                case TileOccupation.Building:
+                                                    // new building
+                                                    isHoveringMaterial = 1;
+                                                    hoverBuilding = t.Building;
+                                                    break;
+                                                default:
+                                                    hoverBuilding = null;
+                                                    hoverMaterial = null;
+                                                    break;
+                                            }
                                         }
                                     }
                                 }
@@ -429,14 +458,8 @@ public class GameController : MonoBehaviour {
                                 hoverTime = 0f;
                             }
                         }
-                       
-
-
                     }
-
-
-
- #endregion
+                #endregion
                 }
 
 
@@ -484,15 +507,9 @@ public class GameController : MonoBehaviour {
     {
         if (isHolding)
         {
+
             moveState = MoveState.Return;
-            bool contains = false;
-            for (int i = 0; i < possiblePositions.Count; i++)
-            {
-                if (possiblePositions[i].Equals(holdPosition))
-                {
-                    contains = true;
-                }
-            }
+
 
 
             //Debug.Log("contains");
